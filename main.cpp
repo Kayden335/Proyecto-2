@@ -66,7 +66,7 @@ int main()
         {
              try {
         cout << "Funcion de Ganancia (Z = P1x1 + P2x2). P1: Precio de Mesa. P2: Precio de Silla.\n";
-        string funcionObjetivo = construirFuncionObjetivo(precioDeVentaMesa, precioDeVentaSilla);
+        string funcionObjetivo = FuncionGanancia(precioDeVentaMesa, precioDeVentaSilla);
         cout << "Funcion de ganancia a maximizar obtenida: " << funcionObjetivo << endl;
                } catch (...) {
         cout << "Se produjo un error durante la ejecucion.\n";

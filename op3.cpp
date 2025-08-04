@@ -3,7 +3,7 @@
 using namespace std;
 
 // Construye la funcion de ganancia con los precios ingresados por consola
-string construirFuncionObjetivo(int precioDeVentaMesa, int precioDeVentaSilla) {
+string FuncionGanancia(int precioDeVentaMesa, int precioDeVentaSilla) {
     string funcion = "Z = ";
 
     // Funcion para P1: Precio de Mesas
