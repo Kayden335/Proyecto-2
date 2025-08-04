@@ -64,14 +64,13 @@ int main()
         break;
         case 3:
         {
-               try {
-        cout << "Opción 3: Calcular solución óptima (Z = fx1*x1 + fx2*x2)\n";
-        cargarDatosPrueba(); // Puedes reemplazar esto con una función de entrada interactiva
-
-        calcularSolucionOptima();
-        } catch (...) {
-        cout << "Se produjo un error durante la ejecución.\n";
-         } 
+             try {
+        cout << "Funcion de Ganancia (Z = P1x1 + P2x2). P1: Precio de Mesa. P2: Precio de Silla.\n";
+        string funcionObjetivo = construirFuncionObjetivo(precioDeVentaMesa, precioDeVentaSilla);
+        cout << "Funcion de ganancia a maximizar obtenida: " << funcionObjetivo << endl;
+               } catch (...) {
+        cout << "Se produjo un error durante la ejecucion.\n";
+               }
         }
         break;
         case 4:
