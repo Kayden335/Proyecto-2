@@ -69,15 +69,15 @@ int main()
         cargarDatosPrueba(); // Puedes reemplazar esto con una función de entrada interactiva
 
         calcularSolucionOptima();
-    } catch (...) {
+        } catch (...) {
         cout << "Se produjo un error durante la ejecución.\n";
-    } 
-    return 0;
+         } 
         }
         break;
         case 4:
         {
-             calcularSolucionOptima(precioDeVentaMesa,
+             cout << "\nOpción 4: Calcular solución óptima (método discreto)\n";
+            calcularSolucionOptima(precioDeVentaMesa,
                            precioDeVentaSilla,
                            coeficienteMesaHoras,
                            coeficienteSillaHoras);

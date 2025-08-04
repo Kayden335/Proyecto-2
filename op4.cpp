@@ -8,56 +8,54 @@ void calcularSolucionOptima(double precioDeVentaMesa,
                             int coeficienteMesaHoras,
                             int coeficienteSillaHoras)
 {
-    // Validación básica
-    if (precioDeVentaMesa <= 0 || precioDeVentaSilla <= 0 ||
-        coeficienteMesaHoras <= 0 || coeficienteSillaHoras <= 0)
-    {
-        cout << "Error: Datos insuficientes o no válidos. Asegúrese de ingresar los precios y restricciones correctamente.\n";
-        return;
-    }
-
-    // Restricciones fijas del problema (según el enunciado)
-    const int maxHorasCarpinteria = 240;
-    const int maxHorasPintura = 100;
-    const int maxSillas = 60;
-
-    // Coeficientes fijos de uso de recursos por producto
-    const int horasCarpinteriaPorMesa = 4;
-    const int horasCarpinteriaPorSilla = 3;
-    const int horasPinturaPorMesa = 2;
-    const int horasPinturaPorSilla = 1;
-
-    int mejorCantidadMesas = 0;
-    int mejorCantidadSillas = 0;
-    double gananciaMaxima = 0.0;
-
-    // Búsqueda exhaustiva en el espacio de soluciones
-    for (int mesas = 0; mesas <= maxHorasCarpinteria / horasCarpinteriaPorMesa; mesas++)
-    {
-        for (int sillas = 0; sillas <= maxSillas; sillas++)
+    try {
+        // Validación básica
+        if (precioDeVentaMesa <= 0 || precioDeVentaSilla <= 0 ||
+            coeficienteMesaHoras <= 0 || coeficienteSillaHoras <= 0)
         {
-            int totalCarpinteria = horasCarpinteriaPorMesa * mesas + horasCarpinteriaPorSilla * sillas;
-            int totalPintura = horasPinturaPorMesa * mesas + horasPinturaPorSilla * sillas;
+            throw runtime_error("Error: Datos insuficientes o no válidos. Asegúrese de ingresar los precios y restricciones correctamente.");
+        }
 
-            if (totalCarpinteria <= maxHorasCarpinteria &&
-                totalPintura <= maxHorasPintura)
+        // Restricciones fijas del problema
+        const int maxHorasCarpinteria = 240;
+        const int maxHorasPintura = 100;
+        const int maxSillas = 60;
+
+        // Ahora se usan los coeficientes ingresados por el usuario
+        int mejorCantidadMesas = 0;
+        int mejorCantidadSillas = 0;
+        double gananciaMaxima = 0.0;
+
+        // Búsqueda exhaustiva
+        for (int mesas = 0; mesas <= maxHorasCarpinteria / coeficienteMesaHoras; mesas++)
+        {
+            for (int sillas = 0; sillas <= maxSillas; sillas++)
             {
-                double ganancia = precioDeVentaMesa * mesas + precioDeVentaSilla * sillas;
+                int totalCarpinteria = coeficienteMesaHoras * mesas + coeficienteSillaHoras * sillas;
+                int totalPintura = 2 * mesas + 1 * sillas; // se mantiene según el enunciado
 
-                if (ganancia > gananciaMaxima)
+                if (totalCarpinteria <= maxHorasCarpinteria && totalPintura <= maxHorasPintura)
                 {
-                    gananciaMaxima = ganancia;
-                    mejorCantidadMesas = mesas;
-                    mejorCantidadSillas = sillas;
+                    double ganancia = precioDeVentaMesa * mesas + precioDeVentaSilla * sillas;
+
+                    if (ganancia > gananciaMaxima)
+                    {
+                        gananciaMaxima = ganancia;
+                        mejorCantidadMesas = mesas;
+                        mejorCantidadSillas = sillas;
+                    }
                 }
             }
         }
-    }
 
-    // Mostrar resultado
-    cout << fixed << setprecision(2);
-    cout << "\nSolución óptima:\n";
-    cout << "Número de mesas a fabricar: " << mejorCantidadMesas << endl;
-    cout << "Número de sillas a fabricar: " << mejorCantidadSillas << endl;
-    cout << "Ganancia máxima: $" << gananciaMaxima << endl;
+        // Mostrar resultado
+        cout << fixed << setprecision(2);
+        cout << "\nSolución óptima:\n";
+        cout << "Número de mesas a fabricar: " << mejorCantidadMesas << endl;
+        cout << "Número de sillas a fabricar: " << mejorCantidadSillas << endl;
+        cout << "Ganancia máxima: $" << gananciaMaxima << endl;
+
+    } catch (exception& e) {
+        cout << "Se produjo un error: " << e.what() << endl;
+    }
 }
